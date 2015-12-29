@@ -1,0 +1,66 @@
+{
+  "name": "creosote",
+  "version": "1.0.0",
+  "description": "A cycle.js driver for a routed HTTP server with middleware",
+  "main": "lib/index.js",
+  "scripts": {
+    "lint": "eslint src",
+    "postlint": "semistandard src/*",
+    "babel": "babel src -d lib",
+    "watch": "nodemon --ignore lib $(which npm) test",
+    "precompile": "npm run lint",
+    "compile": "npm run babel",
+    "pretest": "npm run compile",
+    "test": "tape ./test/*.js | tap-spec",
+    "preversion": "npm test",
+    "version": "git add -A lib"
+  },
+  "babel": {
+    "presets": [
+      "es2015-node4"
+    ],
+    "plugins": [
+      "transform-object-rest-spread",
+      "add-module-exports"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zetlen/creosote.git"
+  },
+  "keywords": [
+    "creosote",
+    "cycle",
+    "http",
+    "server",
+    "express",
+    "cyclejs",
+    "routing"
+  ],
+  "author": "zetlen",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/zetlen/creosote/issues"
+  },
+  "homepage": "https://github.com/zetlen/creosote#readme",
+  "dependencies": {
+    "body-parser": "^1.14.2",
+    "express": "^4.13.3",
+    "path-match": "^1.2.3",
+    "rx": "^4.0.7"
+  },
+  "devDependencies": {
+    "@cycle/core": "^6.0.0",
+    "babel-cli": "^6.3.17",
+    "babel-eslint": "^5.0.0-beta6",
+    "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.3.13",
+    "babel-preset-es2015-node4": "^2.0.2",
+    "eslint": "^1.10.3",
+    "node-fetch": "^1.3.3",
+    "portfinder": "^0.4.0",
+    "semistandard": "^7.0.4",
+    "tap-spec": "^4.1.1",
+    "tape": "^4.4.0"
+  }
+}
