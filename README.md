@@ -1,4 +1,4 @@
-## creosote is a [cycle](http://cycle.js.org) driver for an [express](http://expressjs.com) server
+## creosote is a [Reactive](http://reactivex.org) interface for an [express](http://expressjs.com) server
 
 #### i hope, probably in vain, that this test is good enough documentation for now
 
