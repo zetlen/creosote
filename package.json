@@ -1,6 +1,6 @@
 {
   "name": "creosote",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "A cycle.js driver for a routed HTTP server with middleware",
   "main": "lib/index.js",
   "scripts": {
