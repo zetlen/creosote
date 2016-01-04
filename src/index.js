@@ -4,6 +4,12 @@ import express from 'express';
 import { json, urlencoded, text } from 'body-parser';
 import pathMatch from 'path-match';
 
+const parsers = {
+  json,
+  text,
+  urlencoded: urlencoded.bind(null, { extended: true })
+};
+
 const methods = ['GET', 'POST', 'PUT', 'DELETE'];
 const route = pathMatch();
 
@@ -18,10 +24,21 @@ function methodIs (m) {
   return ({ method }) => method === m;
 }
 
-export default function ({ port, basePath = '/*', middlewares = [] }) {
+export default function ({ port, basePath = '/*', middlewares, expect }) {
   const app = express();
   const everything$ = new Rx.Subject();
-  app.use(json(), urlencoded({ extended: true }), text(), ...middlewares);
+  if (expect) {
+    if (!parsers[expect]) {
+      throw new Error(
+        `Bad 'expect' configuration. No builtin parser for '${expect}'.`
+      );
+    } else {
+      app.use(parsers[expect]());
+    }
+  }
+  if (middlewares) {
+    app.use(...middlewares);
+  }
   app.route(basePath).all(
     (req, res) => everything$.onNext({ method: req.method, req, res })
   );

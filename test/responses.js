@@ -5,7 +5,7 @@ const test = require('./helpers/with-open-port');
 
 test('parses JSON from a post body', (t, port) => {
   t.plan(1);
-  let creosote = Creosote({ port });
+  let creosote = Creosote({ port, expect: 'json' });
   creosote.posts('/repos/:name/:tag')
   .do(o => o.res.status(200).end())
   .reduce(
@@ -62,7 +62,7 @@ test('parses JSON from a post body', (t, port) => {
 
 test('parses form data from a post body', (t, port) => {
   t.plan(1);
-  let creosote = Creosote({ port });
+  let creosote = Creosote({ port, expect: 'urlencoded' });
   creosote.posts('/repos/:name/:tag')
   .do(o => o.res.status(200).end())
   .reduce(
